@@ -1,0 +1,240 @@
+\documentclass[addpoints,10pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{times}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{tcolorbox}
+\usepackage{fancyvrb}
+\usepackage[lighttt]{lmodern}
+\usepackage{listings}
+\lstset{basicstyle=\small\ttfamily,
+	stringstyle=\ttfamily,
+	commentstyle=\color{gray45},
+	showstringspaces = false,
+	keywordstyle=\bfseries}
+\usepackage{multicol,caption,capt-of}
+%multi-row
+\usepackage{multirow}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+
+\begin{document}
+	
+	%Encabezados y pie de página
+	%----------------------------------------------------------------------------------------
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Sistemas Computacionales}{Evaluación Unidad 7}{Mayo 22 de 2025}
+	\runningheader{Sistemas Computacionales}
+	{Evaluación Unidades 7, Page \thepage\ of \numpages}
+	{Mayo 22 de 2025}
+%	\firstpagefooter{Escuela de Ingenierías}{UPB}{Fac. Ing. Eléctrica y Electrónica}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería en Diseño de Entretenimiento Digital}
+	
+	\begin{center}
+	\begin{tabular}{|m{4cm}|m{8cm}|m{5cm}|}
+		\hline 
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{Logo-UPB-2022.pdf}}
+		&\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede  Medellín}}		\\ \cline{2-3}
+		&Curso: \textbf{Sistemas Computacionales}		&Duración: 90 minutos				\\ \cline{2-3}
+		&Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.}	&Evaluador:							\\ \cline{2-3}
+		&Ing. en Diseño de Entretenimiento Digital	&Prueba: Convencional				\\ \cline{2-3}
+		&\multicolumn{2}{l|}{Estudiante:				}										\\ 
+		 \\ \hline  % Línea extra para cerrar el borde inferior
+		
+	\end{tabular} 
+\end{center}
+
+	%----------------------------------------------------------------------------------------
+	%Cuadro con instrucciones
+	%----------------------------------------------------------------------------------------		
+	\tcbset{colback=red!5!white, colframe=red!75!black, fonttitle=\bfseries}
+	\begin{tcolorbox}[title=Nota Importante]
+		Lea cuidadosamente cada una de las preguntas antes de contestar. Durante el examen, no se autoriza el acceso a Internet por medio de ningún dispositivo. Cualquier intento de copia o fraude da lugar a un proceso disciplinario.
+	\end{tcolorbox}
+	%----------------------------------------------------------------------------------------
+	\begin{multicols}{2}
+		
+	\begin{questions}
+		
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}  
+	
+	% ------------------------
+	% PREGUNTAS DE SELECCIÓN MÚLTIPLE
+	% ------------------------
+	\question[3]
+	¿Cuál de los siguientes \textbf{mejor} describe la función principal de un \texttt{vertex shader} dentro del \emph{render pipeline}?
+	
+	\begin{checkboxes}
+		\choice Calcula la iluminación final de cada fragmento usando normales y texturas  
+		\choice Convierte las coordenadas de cada vértice desde el espacio de mundo hasta el espacio de clip  
+		\choice Decide si un triángulo es visible comparando su profundidad con el Z-buffer  
+		\choice Combina la salida de varios fragmentos para obtener el color definitivo de cada píxel  
+	\end{checkboxes}
+	
+	\question[3]
+	El orden correcto de transformaciones que se aplican a un vértice antes de llegar a coordenadas de pantalla es:
+	
+	\begin{checkboxes}
+		\choice View $\rightarrow$ Model $\rightarrow$ Projection $\rightarrow$ Viewport  
+		\choice Model $\rightarrow$ View $\rightarrow$ Projection $\rightarrow$ Viewport  
+		\choice Projection $\rightarrow$ View $\rightarrow$ Model $\rightarrow$ Viewport  
+		\choice Model $\rightarrow$ Projection $\rightarrow$ View $\rightarrow$ Viewport  
+	\end{checkboxes}
+	
+	\question[3]
+	El objetivo principal del \textbf{depth buffer} en la GPU es:
+	
+	\begin{checkboxes}
+		\choice Calcular sombras suaves mediante técnicas de \emph{percentage-closer filtering}  
+		\choice Almacenar el índice de textura utilizado por cada fragmento  
+		\choice Convertir triángulos en fragmentos aplicando interpolación barycéntrica  
+		\choice Resolver la visibilidad comparando la distancia de los fragmentos al observador  
+	\end{checkboxes}
+	
+	\question[3]
+	Una ventaja clave de la ejecución masivamente paralela de la GPU, mostrada en los videos de la actividad 1, es:
+	
+	\begin{checkboxes}
+		\choice La reducción del ancho de banda requerido entre CPU y RAM del sistema  
+		\choice Procesar miles de vértices o fragmentos de manera simultánea con hardware dedicado  
+		\choice Evitar la necesidad de compilar los shaders antes de ejecutarlos  
+		\choice Permitir que la CPU entre en modo de suspensión profunda mientras la GPU trabaja  
+	\end{checkboxes}
+	
+	% --- Pregunta sobre "uniform" ----------------------------
+	\question[3]
+	¿Cuál de las siguientes afirmaciones describe \textbf{mejor} a una variable \texttt{uniform} en GLSL?
+	
+	\begin{checkboxes}
+		\choice Es un dato que cambia para cada vértice y se interpola entre fragmentos  
+		\choice Es un valor constante para todas las invocaciones del shader durante una misma llamada a \texttt{glDraw*}, establecido por la aplicación desde la CPU  
+		\choice Es una variable cuyo valor se calcula dentro del shader y se comparte con la CPU al finalizar el renderizado  
+		\choice Es un registro reservado de la GPU que almacena la profundidad (Z) de cada fragmento renderizado  
+	\end{checkboxes}
+
+	
+	% =========================
+	% 2. PREGUNTAS ABIERTAS (6)
+	% =========================
+	
+	\question[5]
+	Describe \emph{paso a paso} las fases principales del \textbf{render pipeline} tradicional de OpenGL desde que los vértices son enviados por la CPU hasta que los colores aparecen en el framebuffer.
+	
+	\question[5]
+	Explica la diferencia conceptual y práctica entre aplicar un color fijo a una malla mediante un atributo por vértice y aplicar una textura 2D. Incluye al menos un caso de uso para cada técnica.
+	
+	\question[5]
+	En tus propias palabras, ¿qué es un \textbf{uniform} y cómo se comunica la CPU con el GPU para actualizar su valor en tiempo real? Ilustra tu explicación con un ejemplo de código breve.
+	
+	\question[5]
+	El tutorial \emph{Adding Some Interactivity} modifica posiciones de vértices según la posición del mouse. Propón y explica dos modificaciones diferentes (una en el vertex shader y otra en el fragment shader) que generen comportamientos visuales novedosos.
+	
+
+	
+	% =========================
+	% 3. ORDENAR / COMPLETAR (6)
+	% =========================
+	
+	\question[3]
+	\textbf{Jerarquizar.}  
+	Ordena las siguientes etapas del pipeline de renderizado en el orden \emph{exacto} en que se ejecutan (1 = primero, 5 = último):
+	
+	\begin{enumerate}[A. ]
+		\item Rasterization  
+		\item Vertex Shader  
+		\item Fragment Shader  
+		\item Blending / Merge in Framebuffer  
+		\item Input Assembly  
+	\end{enumerate}
+	
+	\bigskip
+	
+	
+	\question[3]
+	\textbf{Completar enunciado.}  
+	
+	> Un \rule{3cm}{0.15mm} shader opera sobre cada \rule{3cm}{0.15mm} de una primitiva y produce datos que, tras la rasterización, se interpolarán para ser consumidos por la siguiente etapa.
+	
+	\bigskip
+	
+	\question[3]
+	\textbf{Completar código.}  
+	Completa el fragmento GLSL para desplazar cada vértice verticalmente según el tiempo transcurrido:
+	
+	\begin{verbatim}
+		// Vertex Shader (incompleto)
+		uniform float u_time;
+		
+		void main(){
+			vec4 pos = vec4(a_position, 1.0);
+			// ---- TU LÍNEA AQUÍ ----
+			gl_Position = projectionMatrix * modelViewMatrix * pos;
+		}
+	\end{verbatim}
+	
+	\bigskip
+	
+	\question[3]
+	\textbf{Jerarquizar.}  
+	Ordena de \textbf{más cercano (1) a más lejano (4)} al observador los valores de profundidad (\emph{depth}) que se podrían escribir en el Z-buffer de OpenGL (asumiendo profundidad normalizada [0, 1]):
+	
+	\begin{enumerate}[A. ]
+		\item 0.4  
+		\item 0.9  
+		\item 0.1  
+		\item 0.7  
+	\end{enumerate}
+	
+	\bigskip
+	
+	\question[3]
+	\textbf{Completar enunciado.}  
+	
+	> El \rule{3cm}{0.15mm} es un área de memoria que almacena el color de cada píxel resultante, mientras que el \rule{3cm}{0.15mm} almacena información de profundidad para resolver la visibilidad de los fragmentos.
+		
+	\end{questions}
+	
+
+	%Sección de preguntas	
+	%----------------------------------------------------------------------------------------	
+
+	%----------------------------------------------------------------------------------------
+	%Código para insertar imágenes
+	%----------------------------------------------------------------------------------------	
+
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics[width=0.5\linewidth]{Cto1}
+%			\captionof{figure}{Circuito 1}
+%			\label{fig:cto1}
+%		\end{figure}
+	%----------------------------------------------------------------------------------------		
+		
+
+	\end{multicols}
+	%----------------------------------------------------------------------------------------
+	%Tabla con puntajes para evaluación	
+	%----------------------------------------------------------------------------------------
+	\begin{center}
+		\resizebox{\linewidth}{!}{
+		\gradetable[h][questions]
+	}
+	\end{center}
+	%----------------------------------------------------------------------------------------	
+%	\newpage
+	% Start of the revision history table
+%	\begin{versionhistory}
+%		\vhEntry{1.0}{15.02.17}{HAC}{created}
+		%\vhEntry{1.1}{23.01.04}{DP|JPW}{correction}
+		%\vhEntry{1.2}{03.02.04}{DP|JPW}{revised after review}
+%	\end{versionhistory}
+	
+\end{document}

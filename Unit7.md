@@ -12,7 +12,7 @@ Para la fase de investigación te vas a concentrar en el tutorial Introducing Sh
 
 ### Actividad 1
 
-<aside>
+</aside>
 ⚠️
 
 **Advertencia**
@@ -102,7 +102,7 @@ Analiza el ejemplo Adding some interactivity.
 
 Con lo que aprendiste en esta unidad vas a realizar una aplicación interactiva que utilice shaders.
 
-<aside>
+</aside>
 ⚠️
 
 **Advertencia**
@@ -119,7 +119,7 @@ Con los conocimientos que has adquirido en esta unidad, realiza la aplicación i
 
 ### Evidencias de los resultados de aprendizaje
 
-<aside>
+</aside>
 ⚠️
 
 **Advertencia**
