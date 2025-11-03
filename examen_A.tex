@@ -1,0 +1,289 @@
+\documentclass[addpoints,10pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{times}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{tcolorbox}
+\usepackage{fancyvrb}
+\usepackage[lighttt]{lmodern}
+\usepackage{listings}
+\lstset{basicstyle=\small\ttfamily,
+	stringstyle=\ttfamily,
+	commentstyle=\color{gray45},
+	showstringspaces = false,
+	keywordstyle=\bfseries}
+\usepackage{multicol,caption,capt-of}
+%multi-row
+\usepackage{multirow}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+
+\begin{document}
+	
+	%Encabezados y pie de página
+	%----------------------------------------------------------------------------------------
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Sistemas Computacionales}{Evaluación Unidad 7 - Versión A}{Mayo 22 de 2025}
+	\runningheader{Sistemas Computacionales}
+	{Evaluación Unidad 7, Page \thepage\ of \numpages}
+	{Mayo 22 de 2025}
+%	\firstpagefooter{Escuela de Ingenierías}{UPB}{Fac. Ing. Eléctrica y Electrónica}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería en Diseño de Entretenimiento Digital}
+	
+	\begin{center}
+	\begin{tabular}{|m{4cm}|m{8cm}|m{5cm}|}
+		\hline 
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{Logo-UPB-2022.pdf}}
+		&\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede  Medellín}}		\\ \cline{2-3}
+		&Curso: \textbf{Sistemas Computacionales}		&Duración: 90 minutos				\\ \cline{2-3}
+		&Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.}	&Evaluador:							\\ \cline{2-3}
+		&Ing. en Diseño de Entretenimiento Digital	&Prueba: Convencional				\\ \cline{2-3}
+		&\multicolumn{2}{l|}{Estudiante:				}										\\ 
+		 \\ \hline  % Línea extra para cerrar el borde inferior
+		
+	\end{tabular} 
+\end{center}
+
+	%----------------------------------------------------------------------------------------
+	%Cuadro con instrucciones
+	%----------------------------------------------------------------------------------------		
+	\tcbset{colback=red!5!white, colframe=red!75!black, fonttitle=\bfseries}
+	\begin{tcolorbox}[title=Nota Importante]
+		Lea cuidadosamente cada una de las preguntas antes de contestar. Durante el examen, no se autoriza el acceso a Internet por medio de ningún dispositivo. Cualquier intento de copia o fraude da lugar a un proceso disciplinario.
+	\end{tcolorbox}
+	%----------------------------------------------------------------------------------------
+	\begin{multicols}{2}
+		
+	\begin{questions}
+		
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}  
+
+	% ------------------------
+	% PREGUNTAS DE SELECCIÓN MÚLTIPLE
+	% ------------------------
+	\question[4]
+	¿Cuál es la función principal del proceso de \textbf{rasterización} en el \emph{render pipeline}?
+	
+	\begin{checkboxes}
+		\choice Aplicar las transformaciones de modelado, vista y proyección a cada vértice  
+		\choice Convertir primitivas geométricas (triángulos) en fragmentos que cubren píxeles específicos de la pantalla  
+		\choice Determinar el color final de cada píxel mediante la interpolación de atributos de vértice  
+		\choice Comparar valores de profundidad para decidir qué fragmentos son visibles  
+	\end{checkboxes}
+	
+	\question[4]
+	En el contexto del \emph{render pipeline}, ¿qué información se interpola desde los vértices hacia los fragmentos durante la rasterización?
+	
+	\begin{checkboxes}
+		\choice Únicamente las coordenadas de posición en el espacio de clip  
+		\choice Atributos como colores, normales, coordenadas de textura y otros datos de vértice  
+		\choice Los valores de profundidad del Z-buffer de cada triángulo  
+		\choice Las instrucciones del vertex shader que se ejecutarán en cada fragmento  
+	\end{checkboxes}
+	
+	\question[4]
+	¿Cuál de las siguientes afirmaciones describe \textbf{mejor} la diferencia entre un \texttt{fragment shader} y un \texttt{vertex shader}?
+	
+	\begin{checkboxes}
+		\choice El vertex shader procesa cada vértice individualmente; el fragment shader procesa cada fragmento (posible píxel) generado tras la rasterización  
+		\choice El vertex shader ejecuta operaciones de iluminación; el fragment shader solo aplica texturas  
+		\choice El fragment shader transforma coordenadas 3D a 2D; el vertex shader calcula colores finales  
+		\choice El vertex shader se ejecuta en la CPU; el fragment shader se ejecuta en la GPU  
+	\end{checkboxes}
+	
+	\question[4]
+	Una aplicación interactiva con shaders necesita actualizar el color de fondo en tiempo real según la posición del mouse. ¿Cuál es la forma \textbf{más apropiada} de enviar esta información desde la CPU al shader?
+	
+	\begin{checkboxes}
+		\choice Modificar directamente el código GLSL del shader y recompilarlo en cada frame  
+		\choice Utilizar una variable \texttt{uniform} que se actualiza desde la aplicación antes de cada llamada de renderizado  
+		\choice Pasar la información como un atributo de vértice que se interpola entre fragmentos  
+		\choice Almacenar los valores en una textura y leerlos mediante coordenadas de textura  
+	\end{checkboxes}
+	
+	\question[4]
+	¿Por qué la GPU puede procesar gráficos mucho más rápido que una CPU de propósito general?
+	
+	\begin{checkboxes}
+		\choice Porque la GPU tiene un reloj de frecuencia significativamente más alta que la CPU  
+		\choice Porque la GPU posee miles de núcleos pequeños optimizados para ejecutar la misma operación en paralelo sobre muchos datos simultáneamente  
+		\choice Porque la GPU no necesita acceder a la memoria RAM del sistema durante el renderizado  
+		\choice Porque la GPU ejecuta los shaders de forma secuencial pero con mayor eficiencia energética  
+	\end{checkboxes}
+
+	
+	% =========================
+	% 2. PREGUNTAS ABIERTAS
+	% =========================
+	
+	\question[10]
+	Explica con detalle las diferencias entre una \textbf{textura} y un \textbf{material} en el contexto de la programación de gráficos 3D. Proporciona al menos un ejemplo de uso práctico para cada uno y describe cómo se utilizan dentro del pipeline de renderizado.
+	
+	\question[10]
+	Describe el proceso completo que sigue un vértice desde que es enviado por la aplicación en la CPU hasta que su contribución aparece como color en el \textbf{framebuffer}. Identifica claramente cada etapa del pipeline y menciona qué transformaciones o procesos ocurren en cada una.
+	
+	\question[10]
+	En el tutorial \emph{Adding Some Interactivity}, se muestra cómo modificar la posición de los vértices de una malla según la entrada del usuario (posición del mouse). Propón y describe en detalle \textbf{dos modificaciones específicas} que realizarías al código:
+	\begin{enumerate}
+		\item Una modificación en el \texttt{vertex shader} que produzca un efecto visual diferente (especifica qué efecto y cómo lo lograrías).
+		\item Una modificación en el \texttt{fragment shader} que altere los colores de manera creativa (especifica el comportamiento deseado y la técnica a usar).
+	\end{enumerate}
+	Incluye fragmentos de código GLSL para ilustrar tus propuestas.
+	
+	\end{questions}
+	
+
+	%Sección de preguntas	
+	%----------------------------------------------------------------------------------------	
+
+	%----------------------------------------------------------------------------------------
+	%Código para insertar imágenes
+	%----------------------------------------------------------------------------------------	
+
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics[width=0.5\linewidth]{Cto1}
+%			\captionof{figure}{Circuito 1}
+%			\label{fig:cto1}
+%		\end{figure}
+	%----------------------------------------------------------------------------------------		
+		
+
+	\end{multicols}
+	%----------------------------------------------------------------------------------------
+	%Tabla con puntajes para evaluación	
+	%----------------------------------------------------------------------------------------
+	\begin{center}
+		\resizebox{\linewidth}{!}{
+		\gradetable[h][questions]
+	}
+	\end{center}
+	%----------------------------------------------------------------------------------------	
+%	\newpage
+	% Start of the revision history table
+%	\begin{versionhistory}
+%		\vhEntry{1.0}{15.02.17}{HAC}{created}
+		%\vhEntry{1.1}{23.01.04}{DP|JPW}{correction}
+		%\vhEntry{1.2}{03.02.04}{DP|JPW}{revised after review}
+%	\end{versionhistory}
+	
+\end{document}
+
+% =========================
+% SOLUCIONES Y CLAVES - EXAMEN A
+% =========================
+% 
+% PREGUNTAS DE SELECCIÓN MÚLTIPLE (4 puntos cada una)
+% 
+% Pregunta 1: B (Convertir primitivas geométricas en fragmentos)
+% Justificación: La rasterización toma triángulos y determina qué píxeles cubren.
+% Distractores: A es vertex shader, C es fragment shader, D es depth test.
+% 
+% Pregunta 2: B (Atributos como colores, normales, coordenadas de textura)
+% Justificación: La interpolación pasa todos los atributos de vértice a fragmentos.
+% Distractores: A es incompleto, C es información del Z-buffer no interpolado así, D es conceptualmente incorrecto.
+% 
+% Pregunta 3: A (Vertex procesa vértices; fragment procesa fragmentos)
+% Justificación: Definición correcta de ambos shaders y su rol en el pipeline.
+% Distractores: B simplifica excesivamente, C invierte roles, D ubica mal la ejecución.
+% 
+% Pregunta 4: B (Utilizar variable uniform)
+% Justificación: Los uniforms son el mecanismo estándar para pasar datos de CPU a shader.
+% Distractores: A es ineficiente, C es para datos por vértice, D es indirecto y complejo.
+% 
+% Pregunta 5: B (Miles de núcleos en paralelo)
+% Justificación: La arquitectura paralela masiva es la ventaja clave de la GPU.
+% Distractores: A es falso (GPUs suelen tener menor frecuencia), C es falso, D es incorrecto (no es secuencial).
+% 
+% 
+% PREGUNTAS ABIERTAS (10 puntos cada una)
+% 
+% Pregunta 6: Textura vs Material
+% Rúbrica:
+% - Definición de textura (imagen 2D mapeada a superficie): 2 pts
+% - Definición de material (propiedades de superficie como reflectancia, roughness): 2 pts
+% - Ejemplo de textura (ej: mapa de color de una pared de ladrillos): 2 pts
+% - Ejemplo de material (ej: propiedades metálicas vs plásticas): 2 pts
+% - Integración en pipeline y diferenciación clara: 2 pts
+% 
+% Solución modelo:
+% Una textura es una imagen 2D (o array de datos) que se mapea sobre la superficie de una
+% geometría para añadir detalle visual (color, relieve mediante normal maps, etc.). 
+% Ejemplo: foto de madera aplicada a un modelo 3D de mesa.
+% 
+% Un material define las propiedades físicas de una superficie que determinan cómo 
+% interactúa con la luz: reflectividad, rugosidad, metalicidad, etc.
+% Ejemplo: un material metálico brillante vs uno mate.
+% 
+% En el pipeline, las texturas se leen en el fragment shader para obtener valores (color, normal),
+% mientras que las propiedades del material se usan en cálculos de iluminación (ej: ecuaciones
+% de sombreado físicamente basado - PBR).
+% 
+% 
+% Pregunta 7: Pipeline completo vértice a framebuffer
+% Rúbrica:
+% - Identificación de etapas principales (Input Assembly, Vertex Shader, Rasterization, Fragment Shader, Tests, Framebuffer): 3 pts
+% - Descripción de transformaciones (Model-View-Projection): 2 pts
+% - Explicación de rasterización e interpolación: 2 pts
+% - Depth test y blending: 2 pts
+% - Claridad y orden lógico: 1 pt
+% 
+% Solución modelo:
+% 1. Input Assembly: Los vértices se agrupan en primitivas (triángulos).
+% 2. Vertex Shader: Cada vértice se transforma mediante matrices Model-View-Projection,
+%    convirtiendo coordenadas locales → mundo → vista → clip.
+% 3. Rasterización: Los triángulos se convierten en fragmentos. Los atributos de vértice
+%    (color, UV, normales) se interpolan para cada fragmento.
+% 4. Fragment Shader: Cada fragmento calcula su color final usando texturas, iluminación, etc.
+% 5. Tests (Depth Test): Se compara la profundidad del fragmento con el Z-buffer; 
+%    fragmentos ocultos se descartan.
+% 6. Blending/Framebuffer: Fragmentos visibles se combinan (blending si hay transparencia)
+%    y se escriben al framebuffer, que contiene la imagen final en pantalla.
+% 
+% 
+% Pregunta 8: Modificaciones interactivas (vertex y fragment shader)
+% Rúbrica:
+% - Propuesta de modificación en vertex shader con descripción clara del efecto: 3 pts
+% - Código GLSL o pseudocódigo razonable para vertex shader: 2 pts
+% - Propuesta de modificación en fragment shader con descripción del comportamiento: 3 pts
+% - Código GLSL o pseudocódigo razonable para fragment shader: 2 pts
+% 
+% Solución modelo (ejemplo):
+% 
+% Modificación 1 - Vertex Shader: Efecto de onda sinusoidal
+% Descripción: Desplazar vértices en el eje Y usando una función seno basada en la posición X
+% y el tiempo, creando un efecto de onda que se propaga horizontalmente.
+% 
+% Código GLSL:
+%   uniform float u_time;
+%   void main(){
+%       vec4 pos = vec4(a_position, 1.0);
+%       pos.y += sin(pos.x * 3.0 + u_time * 2.0) * 0.5;
+%       gl_Position = projectionMatrix * modelViewMatrix * pos;
+%   }
+% 
+% Modificación 2 - Fragment Shader: Gradiente radial desde el mouse
+% Descripción: Calcular la distancia de cada fragmento a la posición del mouse (pasada como uniform)
+% y aplicar un gradiente de color (ej: rojo cerca, azul lejos).
+% 
+% Código GLSL:
+%   uniform vec2 u_mouse;
+%   uniform vec2 u_resolution;
+%   void main(){
+%       vec2 st = gl_FragCoord.xy / u_resolution;
+%       float dist = distance(st, u_mouse);
+%       vec3 color = mix(vec3(1.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0), dist);
+%       gl_FragColor = vec4(color, 1.0);
+%   }
+% 
+% =========================
+% FIN DE SOLUCIONES
+% =========================

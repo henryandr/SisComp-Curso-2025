@@ -1,0 +1,333 @@
+\documentclass[addpoints,10pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{times}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{array} 
+\usepackage{vhistory}
+\usepackage{tcolorbox}
+\usepackage{fancyvrb}
+\usepackage[lighttt]{lmodern}
+\usepackage{listings}
+\lstset{basicstyle=\small\ttfamily,
+	stringstyle=\ttfamily,
+	commentstyle=\color{gray45},
+	showstringspaces = false,
+	keywordstyle=\bfseries}
+\usepackage{multicol,caption,capt-of}
+%multi-row
+\usepackage{multirow}
+\usepackage[left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm]{geometry}
+
+\begin{document}
+	
+	%Encabezados y pie de página
+	%----------------------------------------------------------------------------------------
+	\pagestyle{headandfoot}
+	\runningheadrule
+	\firstpageheader{Sistemas Computacionales}{Evaluación Unidad 7 - Versión B}{Mayo 22 de 2025}
+	\runningheader{Sistemas Computacionales}
+	{Evaluación Unidad 7, Page \thepage\ of \numpages}
+	{Mayo 22 de 2025}
+%	\firstpagefooter{Escuela de Ingenierías}{UPB}{Fac. Ing. Eléctrica y Electrónica}
+	\runningfooter{Escuela de Ingenierías}{UPB}{Ingeniería en Diseño de Entretenimiento Digital}
+	
+	\begin{center}
+	\begin{tabular}{|m{4cm}|m{8cm}|m{5cm}|}
+		\hline 
+		\multirow{5}{*}{\includegraphics[width=1\linewidth]{Logo-UPB-2022.pdf}}
+		&\multicolumn{2}{c|}{\textbf{Universidad Pontificia Bolivariana - Sede  Medellín}}		\\ \cline{2-3}
+		&Curso: \textbf{Sistemas Computacionales}		&Duración: 90 minutos				\\ \cline{2-3}
+		&Preparada por:\textbf{ Henry Andrade, IEo, Ph.D.}	&Evaluador:							\\ \cline{2-3}
+		&Ing. en Diseño de Entretenimiento Digital	&Prueba: Convencional				\\ \cline{2-3}
+		&\multicolumn{2}{l|}{Estudiante:				}										\\ 
+		 \\ \hline  % Línea extra para cerrar el borde inferior
+		
+	\end{tabular} 
+\end{center}
+
+	%----------------------------------------------------------------------------------------
+	%Cuadro con instrucciones
+	%----------------------------------------------------------------------------------------		
+	\tcbset{colback=red!5!white, colframe=red!75!black, fonttitle=\bfseries}
+	\begin{tcolorbox}[title=Nota Importante]
+		Lea cuidadosamente cada una de las preguntas antes de contestar. Durante el examen, no se autoriza el acceso a Internet por medio de ningún dispositivo. Cualquier intento de copia o fraude da lugar a un proceso disciplinario.
+	\end{tcolorbox}
+	%----------------------------------------------------------------------------------------
+	\begin{multicols}{2}
+		
+	\begin{questions}
+		
+	\boxedpoints
+	\pointname{ Puntos}
+	\qformat{Pregunta \thequestion \dotfill \thepoints}  
+
+	% ------------------------
+	% PREGUNTAS DE SELECCIÓN MÚLTIPLE
+	% ------------------------
+	\question[4]
+	¿Cuál de las siguientes secuencias de transformaciones describe \textbf{correctamente} el proceso que sigue un vértice en el pipeline gráfico tradicional?
+	
+	\begin{checkboxes}
+		\choice Local (Model) $\rightarrow$ View $\rightarrow$ Clip (Projection) $\rightarrow$ Screen (Viewport)  
+		\choice View $\rightarrow$ Local (Model) $\rightarrow$ Screen (Viewport) $\rightarrow$ Clip (Projection)  
+		\choice Clip (Projection) $\rightarrow$ Local (Model) $\rightarrow$ View $\rightarrow$ Screen (Viewport)  
+		\choice Local (Model) $\rightarrow$ Clip (Projection) $\rightarrow$ View $\rightarrow$ Screen (Viewport)  
+	\end{checkboxes}
+	
+	\question[4]
+	El \textbf{framebuffer} es un componente fundamental del pipeline de renderizado. ¿Cuál de las siguientes afirmaciones lo describe \textbf{mejor}?
+	
+	\begin{checkboxes}
+		\choice Es un área de memoria que almacena únicamente los valores de profundidad (Z) de cada píxel  
+		\choice Es un buffer que contiene el color final de cada píxel que se mostrará en la pantalla  
+		\choice Es una estructura de datos que almacena las coordenadas de textura de cada fragmento  
+		\choice Es un registro especial de la GPU que guarda las instrucciones del fragment shader  
+	\end{checkboxes}
+	
+	\question[4]
+	En el contexto de la programación de shaders, ¿qué característica distingue a una variable \texttt{attribute} de una variable \texttt{uniform} en GLSL?
+	
+	\begin{checkboxes}
+		\choice Los \texttt{attributes} son constantes para todas las invocaciones del shader en una llamada de dibujado; los \texttt{uniforms} varían por vértice  
+		\choice Los \texttt{attributes} varían por vértice y se pasan individualmente a cada uno; los \texttt{uniforms} son constantes para toda la llamada de dibujado  
+		\choice Los \texttt{attributes} solo se usan en fragment shaders; los \texttt{uniforms} solo en vertex shaders  
+		\choice Los \texttt{attributes} se calculan dentro del shader; los \texttt{uniforms} se leen desde texturas  
+	\end{checkboxes}
+	
+	\question[4]
+	¿Cuál es el propósito principal del \textbf{Z-buffer} (o \emph{depth buffer}) en el proceso de renderizado?
+	
+	\begin{checkboxes}
+		\choice Almacenar las coordenadas de textura para cada fragmento antes de aplicar el muestreo  
+		\choice Resolver qué fragmentos son visibles comparando sus distancias al observador y descartando los ocultos  
+		\choice Interpolar los atributos de vértice (como colores y normales) hacia los fragmentos  
+		\choice Compilar y optimizar el código GLSL de los shaders antes de la ejecución  
+	\end{checkboxes}
+	
+	\question[4]
+	Una característica fundamental de la arquitectura de la GPU que le permite procesar gráficos de manera eficiente es:
+	
+	\begin{checkboxes}
+		\choice Ejecutar instrucciones de manera estrictamente secuencial pero con menor latencia que la CPU  
+		\choice Tener un único núcleo muy potente que maneja todas las operaciones gráficas de forma serial  
+		\choice Poseer una arquitectura masivamente paralela con muchos núcleos que ejecutan la misma instrucción sobre diferentes datos (SIMD)  
+		\choice Depender exclusivamente de la CPU para todos los cálculos de transformación y sombreado  
+	\end{checkboxes}
+
+	
+	% =========================
+	% 2. PREGUNTAS ABIERTAS
+	% =========================
+	
+	\question[10]
+	Explica en detalle qué es un \textbf{uniform} en el contexto de la programación de shaders con GLSL. Describe cómo la aplicación en la CPU puede comunicarse con el shader en la GPU para actualizar el valor de un uniform en tiempo real. Ilustra tu explicación con un ejemplo de código breve (tanto del lado de la aplicación como del shader) que muestre cómo pasar un valor de tiempo (\texttt{u\_time}) para crear una animación.
+	
+	\question[10]
+	Describe las etapas principales del \textbf{render pipeline} de OpenGL, desde que la aplicación envía los datos de geometría hasta que los píxeles finales aparecen en la pantalla. Para cada etapa, menciona qué tipo de procesamiento se realiza y qué componente del pipeline (vertex shader, rasterizador, fragment shader, etc.) está involucrado.
+	
+	\question[10]
+	En los tutoriales de la unidad, aprendiste a modificar tanto vértices como fragmentos mediante shaders. Propón \textbf{dos ejemplos concretos} de aplicaciones interactivas que podrías crear utilizando shaders:
+	\begin{enumerate}
+		\item Una aplicación que modifique la geometría en el \texttt{vertex shader} en respuesta a la entrada del usuario (describe el efecto visual y el mecanismo técnico).
+		\item Una aplicación que manipule colores o patrones en el \texttt{fragment shader} basándose en algún parámetro dinámico (describe el comportamiento y la implementación).
+	\end{enumerate}
+	Incluye explicaciones claras de cómo implementarías cada idea y qué variables uniform o atributos utilizarías.
+	
+	\end{questions}
+	
+
+	%Sección de preguntas	
+	%----------------------------------------------------------------------------------------	
+
+	%----------------------------------------------------------------------------------------
+	%Código para insertar imágenes
+	%----------------------------------------------------------------------------------------	
+
+%		\begin{figure}[h]
+%			\centering
+%			\includegraphics[width=0.5\linewidth]{Cto1}
+%			\captionof{figure}{Circuito 1}
+%			\label{fig:cto1}
+%		\end{figure}
+	%----------------------------------------------------------------------------------------		
+		
+
+	\end{multicols}
+	%----------------------------------------------------------------------------------------
+	%Tabla con puntajes para evaluación	
+	%----------------------------------------------------------------------------------------
+	\begin{center}
+		\resizebox{\linewidth}{!}{
+		\gradetable[h][questions]
+	}
+	\end{center}
+	%----------------------------------------------------------------------------------------	
+%	\newpage
+	% Start of the revision history table
+%	\begin{versionhistory}
+%		\vhEntry{1.0}{15.02.17}{HAC}{created}
+		%\vhEntry{1.1}{23.01.04}{DP|JPW}{correction}
+		%\vhEntry{1.2}{03.02.04}{DP|JPW}{revised after review}
+%	\end{versionhistory}
+	
+\end{document}
+
+% =========================
+% SOLUCIONES Y CLAVES - EXAMEN B
+% =========================
+% 
+% PREGUNTAS DE SELECCIÓN MÚLTIPLE (4 puntos cada una)
+% 
+% Pregunta 1: A (Local → View → Clip → Screen)
+% Justificación: Secuencia correcta de transformaciones en el pipeline gráfico.
+% Distractores: B invierte Model y View, C comienza con Projection incorrectamente, D coloca Projection antes de View.
+% 
+% Pregunta 2: B (Buffer que contiene el color final de cada píxel)
+% Justificación: El framebuffer es el destino final donde se escriben los colores para mostrar.
+% Distractores: A describe el Z-buffer, C describe atributos interpolados, D es conceptualmente incorrecto.
+% 
+% Pregunta 3: B (Attributes varían por vértice; uniforms son constantes)
+% Justificación: Definición correcta de la diferencia entre attributes y uniforms.
+% Distractores: A invierte los conceptos, C limita incorrectamente su uso, D describe mecanismos erróneos.
+% 
+% Pregunta 4: B (Resolver visibilidad comparando distancias)
+% Justificación: El Z-buffer/depth buffer guarda profundidades para el depth test.
+% Distractores: A describe coordenadas de textura, C describe interpolación, D describe compilación de shaders.
+% 
+% Pregunta 5: C (Arquitectura masivamente paralela SIMD)
+% Justificación: La GPU tiene muchos núcleos para procesamiento paralelo de datos gráficos.
+% Distractores: A es incorrecto (GPU es paralela, no secuencial), B es falso, D invierte la independencia GPU-CPU.
+% 
+% 
+% PREGUNTAS ABIERTAS (10 puntos cada una)
+% 
+% Pregunta 6: Uniforms y comunicación CPU-GPU
+% Rúbrica:
+% - Definición correcta de uniform (variable constante por llamada de dibujado): 2 pts
+% - Explicación de cómo se establece desde CPU (función setUniform o similar): 2 pts
+% - Ejemplo de código del lado de la aplicación (C++/openFrameworks): 2 pts
+% - Ejemplo de código GLSL del shader recibiendo el uniform: 2 pts
+% - Claridad y coherencia de la explicación: 2 pts
+% 
+% Solución modelo:
+% Un uniform es una variable global del shader cuyo valor es constante para todas las 
+% invocaciones del shader durante una misma llamada de renderizado (glDraw*). Se utiliza
+% para pasar datos desde la CPU que son comunes a todos los vértices/fragmentos, como
+% tiempo, posición del mouse, matrices de transformación, etc.
+% 
+% Comunicación CPU → GPU:
+% La aplicación utiliza funciones como glUniform* o métodos del framework (ej: ofShader::setUniform)
+% para enviar el valor al shader antes de dibujar.
+% 
+% Ejemplo - Aplicación (C++ con openFrameworks):
+%   float currentTime = ofGetElapsedTimef();
+%   myShader.begin();
+%   myShader.setUniform1f("u_time", currentTime);
+%   ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+%   myShader.end();
+% 
+% Ejemplo - Shader (GLSL):
+%   // Fragment Shader
+%   uniform float u_time;
+%   void main(){
+%       float pulse = sin(u_time * 2.0) * 0.5 + 0.5;
+%       gl_FragColor = vec4(pulse, pulse, pulse, 1.0);
+%   }
+% 
+% Este código crea un efecto de parpadeo sincronizado con el tiempo.
+% 
+% 
+% Pregunta 7: Render Pipeline completo
+% Rúbrica:
+% - Input Assembly mencionado: 1 pt
+% - Vertex Shader y transformaciones: 2 pts
+% - Rasterización e interpolación: 2 pts
+% - Fragment Shader y cálculo de color: 2 pts
+% - Tests (depth, stencil) y escritura al framebuffer: 2 pts
+% - Orden lógico y claridad: 1 pt
+% 
+% Solución modelo:
+% 1. Input Assembly: La aplicación envía vértices y la GPU los ensambla en primitivas (puntos, líneas, triángulos).
+% 
+% 2. Vertex Shader: Cada vértice se procesa independientemente. Se aplican transformaciones
+%    (Model, View, Projection) para convertir coordenadas locales a coordenadas de clip.
+%    También se pueden calcular atributos adicionales (normales transformadas, coordenadas de textura).
+% 
+% 3. Rasterización: Los triángulos se convierten en fragmentos. Para cada píxel que cubre
+%    el triángulo, se genera un fragmento. Los atributos de los vértices (color, UV, etc.)
+%    se interpolan usando coordenadas baricéntricas.
+% 
+% 4. Fragment Shader: Cada fragmento ejecuta el código del shader para determinar su color.
+%    Aquí se aplican texturas, iluminación, efectos especiales, etc.
+% 
+% 5. Tests y Blending: 
+%    - Depth Test: Se compara la profundidad del fragmento con el valor en el Z-buffer.
+%      Si el fragmento está más cerca, pasa; si no, se descarta.
+%    - Stencil Test y otros tests opcionales.
+%    - Blending: Si hay transparencia, el color del fragmento se mezcla con el color existente.
+% 
+% 6. Framebuffer: Los fragmentos que pasan todos los tests se escriben al framebuffer,
+%    actualizando el color del píxel. El contenido del framebuffer se muestra en pantalla.
+% 
+% 
+% Pregunta 8: Propuestas de aplicaciones interactivas con shaders
+% Rúbrica:
+% - Propuesta 1 (vertex shader) con descripción del efecto: 2 pts
+% - Explicación técnica y uniform/atributos para propuesta 1: 2 pts
+% - Propuesta 2 (fragment shader) con descripción del comportamiento: 2 pts
+% - Explicación técnica y uniform/atributos para propuesta 2: 2 pts
+% - Viabilidad y creatividad de ambas propuestas: 2 pts
+% 
+% Solución modelo (ejemplos):
+% 
+% Aplicación 1 - Deformación de Malla según Audio:
+% Efecto: Una malla plana (grid) se deforma verticalmente en tiempo real según la amplitud
+% de entrada de audio. Los vértices se elevan más cuando el volumen es mayor.
+% 
+% Implementación:
+% - En la aplicación: Analizar la entrada de audio (FFT o amplitud RMS) y pasar el valor
+%   como uniform al vertex shader.
+% - Vertex Shader: Recibir uniform float u_audioLevel y desplazar cada vértice en Y:
+%   
+%   uniform float u_audioLevel;
+%   void main(){
+%       vec4 pos = vec4(a_position, 1.0);
+%       pos.y += u_audioLevel * sin(pos.x * 5.0) * 0.3;
+%       gl_Position = projectionMatrix * modelViewMatrix * pos;
+%   }
+% 
+% Variables: u_audioLevel (uniform), a_position (attribute de vértice).
+% 
+% 
+% Aplicación 2 - Pincel de Color Interactivo:
+% Comportamiento: Al mover el mouse sobre la pantalla, el fragment shader genera un gradiente
+% de color radial centrado en la posición del mouse, con colores que varían según la distancia.
+% Permite crear patrones visuales interactivos.
+% 
+% Implementación:
+% - En la aplicación: Pasar la posición del mouse normalizada (0-1) y la resolución de pantalla
+%   como uniforms.
+% - Fragment Shader: Calcular la distancia del fragmento al mouse y aplicar un mapeo de color:
+%   
+%   uniform vec2 u_mouse;      // posición del mouse normalizada
+%   uniform vec2 u_resolution; // tamaño de pantalla
+%   void main(){
+%       vec2 st = gl_FragCoord.xy / u_resolution;
+%       float dist = distance(st, u_mouse);
+%       vec3 color = vec3(0.0);
+%       if(dist < 0.2){
+%           color = mix(vec3(1.0, 0.5, 0.0), vec3(0.0, 0.5, 1.0), dist * 5.0);
+%       }
+%       gl_FragColor = vec4(color, 1.0);
+%   }
+% 
+% Variables: u_mouse, u_resolution (uniforms).
+% 
+% =========================
+% FIN DE SOLUCIONES
+% =========================

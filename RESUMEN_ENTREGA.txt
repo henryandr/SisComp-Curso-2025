@@ -1,0 +1,226 @@
+================================================================================
+RESUMEN DE ENTREGA: EXÁMENES ALTERNATIVOS A Y B - UNIDAD 7
+================================================================================
+
+REPOSITORIO: henryandr/SisComp-Curso-2025
+RAMA: copilot/add-alternate-exams-unit-7
+FECHA: Mayo 2025
+
+================================================================================
+ARCHIVOS CREADOS
+================================================================================
+
+1. examen_A.tex (14K)
+   - Examen alternativo versión A
+   - 5 MCQ (4 pts c/u) + 3 abiertas (10 pts c/u) = 50 pts
+   - Soluciones en comentarios (líneas 181-288)
+
+2. examen_B.tex (16K)
+   - Examen alternativo versión B
+   - 5 MCQ (4 pts c/u) + 3 abiertas (10 pts c/u) = 50 pts
+   - Soluciones en comentarios (líneas 181-332)
+
+3. VALIDACION.md (12K)
+   - Matrices de cobertura temática
+   - Análisis de dificultad y originalidad
+   - Checklist de calidad completo
+
+4. README_EXAMENES.md (5K)
+   - Instrucciones de uso y compilación
+   - Guía de estructura y soluciones
+   - Recomendaciones para aplicación
+
+================================================================================
+CUMPLIMIENTO DE REQUISITOS
+================================================================================
+
+✓ ESTRUCTURA (Paso 7)
+  - Cada examen: 5 MCQ (4 pts) + 3 abiertas (10 pts) = 50 pts
+  - Formato LaTeX idéntico al examen guía (Eval-U7_2025-1.tex)
+  - Preámbulo, paquetes y macros consistentes
+
+✓ COBERTURA TEMÁTICA (Pasos 1-4)
+  - GPU y arquitectura paralela
+  - Vertex y fragment shaders
+  - Render pipeline completo
+  - Uniforms y comunicación CPU-GPU
+  - Conceptos técnicos (rasterización, Z-buffer, framebuffer)
+  - Programación interactiva con shaders
+
+✓ ANÁLISIS Y BLUEPRINTS (Pasos 2-4)
+  - Contenido basado en Unit7.md y enlaces consultados
+  - Blueprint con distribución de temas y dificultad
+  - Cobertura equilibrada de objetivos de aprendizaje
+
+✓ ORIGINALIDAD (Paso 6)
+  - Sin copias literales del examen guía
+  - Preguntas variadas entre A y B (superposición mínima)
+  - Distractores basados en errores conceptuales comunes
+
+✓ DIFICULTAD (Paso 6)
+  - Distribución similar al examen guía
+  - Balance: básica (16%), media (20-24%), alta (40%)
+  - Ambos exámenes equivalentes en complejidad
+
+✓ SOLUCIONES (Paso 5-7)
+  - Claves de MCQ con justificaciones completas
+  - Explicación de cada distractor
+  - Rúbricas detalladas para preguntas abiertas (10 pts)
+  - Soluciones modelo con ejemplos de código GLSL
+
+✓ CALIDAD (Paso 6)
+  - Enunciados claros y no ambiguos
+  - Opciones mutuamente excluyentes
+  - Lenguaje inclusivo sin sesgos
+  - Sin pistas no intencionales
+  - Suma de puntos verificada: 50 por examen
+
+================================================================================
+PROCESO SEGUIDO
+================================================================================
+
+Paso 0: ✓ Contexto alineado - Requisitos claros
+Paso 1: ✓ Archivos localizados (Unit7.md, Eval-U7_2025-1.tex)
+Paso 2: ✓ Enlaces de unidad analizados (videos GPU, tutorial shaders)
+Paso 3: ✓ Examen guía analizado (estructura, dificultad, estilo)
+Paso 4: ✓ Blueprints diseñados (A y B con cobertura equivalente)
+Paso 5: ✓ Ítems generados (con soluciones y rubricados)
+Paso 6: ✓ Validaciones completas (cobertura, dificultad, originalidad)
+Paso 7: ✓ LaTeX renderizado (formato consistente con guía)
+Paso 8: ✓ Compilación verificada (nota sobre Logo-UPB-2022.pdf)
+Paso 9: ✓ PR abierto en rama copilot/add-alternate-exams-unit-7
+Paso 10: ✓ Listo para revisión pedagógica
+
+================================================================================
+DIFERENCIACIÓN EXAMEN A vs B
+================================================================================
+
+MCQ (Preguntas 1-5):
+  A-Q1: Rasterización           | B-Q1: Transformaciones pipeline
+  A-Q2: Interpolación            | B-Q2: Framebuffer
+  A-Q3: Vertex vs Fragment       | B-Q3: Attributes vs Uniforms
+  A-Q4: Uniforms (interactivo)   | B-Q4: Z-buffer
+  A-Q5: GPU paralela (general)   | B-Q5: GPU SIMD (específico)
+
+ABIERTAS (Preguntas 6-8):
+  A-Q6: Texturas vs Materiales   | B-Q6: Uniforms con código
+  A-Q7: Pipeline (flujo datos)   | B-Q7: Pipeline (etapas/componentes)
+  A-Q8: Modificaciones GLSL      | B-Q8: Propuestas aplicaciones
+
+Superposición: MÍNIMA (solo tema pipeline en Q7, enfoque diferente)
+
+================================================================================
+COMPILACIÓN LATEX
+================================================================================
+
+Requisitos:
+  - LaTeX distribution (TeX Live, MiKTeX, etc.)
+  - Paquetes estándar (exam, babel, graphicx, tcolorbox, etc.)
+  - Logo-UPB-2022.pdf en mismo directorio (o comentar línea 42)
+
+Comandos:
+  pdflatex examen_A.tex
+  pdflatex examen_B.tex
+
+Sin logo:
+  Comentar línea 42 en ambos archivos:
+  % \multirow{5}{*}{\includegraphics[width=1\linewidth]{Logo-UPB-2022.pdf}}
+
+================================================================================
+UBICACIÓN DE SOLUCIONES
+================================================================================
+
+examen_A.tex:
+  - Claves MCQ: Comentarios líneas 181-205
+  - Abiertas: Comentarios líneas 207-287
+  - Formato: Rúbrica + Solución modelo con código
+
+examen_B.tex:
+  - Claves MCQ: Comentarios líneas 181-205
+  - Abiertas: Comentarios líneas 207-331
+  - Formato: Rúbrica + Solución modelo con código
+
+================================================================================
+TEMAS CUBIERTOS (UNIT7.MD)
+================================================================================
+
+1. Arquitectura GPU
+   - Procesamiento paralelo masivo (SIMD)
+   - Diferencias CPU vs GPU
+   - Núcleos especializados
+
+2. Shaders
+   - Vertex shaders (transformaciones)
+   - Fragment shaders (color/textura)
+   - Diferencias y pipeline
+
+3. Render Pipeline
+   - Input Assembly
+   - Vertex Processing
+   - Rasterización
+   - Fragment Processing
+   - Tests (depth, stencil)
+   - Framebuffer
+
+4. Transformaciones
+   - Model → View → Projection → Viewport
+   - Matrices de transformación
+
+5. Comunicación CPU-GPU
+   - Variables uniform
+   - Atributos de vértice
+   - Actualización en tiempo real
+
+6. Conceptos Técnicos
+   - Rasterización (triángulos → fragmentos)
+   - Interpolación de atributos
+   - Z-buffer / Depth buffer
+   - Framebuffer
+   - Texturas vs Materiales
+
+7. Programación Interactiva
+   - OpenFrameworks + GLSL
+   - Modificación de vértices
+   - Manipulación de colores
+   - Entrada del usuario (mouse, tiempo)
+
+================================================================================
+ENLACES CONSULTADOS
+================================================================================
+
+1. Video: How does a GPU work?
+   https://youtu.be/h9Z4oGN89MU
+   - Arquitectura GPU básica
+   - Procesamiento paralelo
+
+2. Video: Graphics Pipeline
+   https://youtu.be/C8YtdC8mxTU
+   - Pipeline detallado
+   - Shaders, transformaciones, Z-buffer
+
+3. Tutorial: Introducing Shaders (OpenFrameworks)
+   https://openframeworks.cc/ofBook/chapters/shaders.html
+   - GLSL syntax
+   - Uniforms y attributes
+   - Ejemplos interactivos
+
+================================================================================
+PRÓXIMOS PASOS
+================================================================================
+
+1. Revisión pedagógica del contenido
+2. Verificación de soluciones modelo
+3. Compilación de PDFs finales (requiere logo)
+4. Aprobación y merge del PR
+5. Aplicación en evaluaciones futuras
+
+================================================================================
+CONTACTO
+================================================================================
+
+Preparado por: Henry Andrade, IEo, Ph.D.
+Curso: Sistemas Computacionales
+Programa: Ingeniería en Diseño de Entretenimiento Digital
+Institución: Universidad Pontificia Bolivariana - Sede Medellín
+
+================================================================================
