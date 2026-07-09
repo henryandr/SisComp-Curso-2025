@@ -1,12 +1,12 @@
 # Unidad 7: GPU
 
-## Introducción 📜
+# **Introducción 📜**
 
 En esta unidad vas a realizar una introducción práctica a la programación gráfica moderna. Usarás, como caso de estudio, un ejemplo básico llamado el triángulo simple que previamente configuré para ti en Visual Studio con C++, GLFW y GLAD para explorar cómo se crean gráficos acelerados por hardware con OpenGL. Nos centraremos en entender el **pipeline programable** analizando ejemplos funcionales y culminando con un problema simple que te permita consolidar lo aprendido.
 
 El material de esta unidad es una adaptación del curso [learn opengl](https://learnopengl.com/) y por limitaciones de tiempo te darás cuanta que, comparado con el curso original, es un poco más reducido. La idea es que puedas entender los conceptos básicos de OpenGL.
 
-## ¿Qué aprenderás en esta unidad? 💡
+# **¿Qué aprenderás en esta unidad? 💡**
 
 - **Navegar un proyecto OpenGL básico:** entenderás la estructura y el ciclo de vida de una aplicación gráfica simple.
 - **Identificar el rol de los Shaders:** modificarás vertex y fragment shaders básicos (GLSL) y entenderás su impacto.
@@ -14,9 +14,9 @@ El material de esta unidad es una adaptación del curso [learn opengl](https://
 - **Usar Uniforms:** pasarás datos dinámicos desde C++ a tus shaders.
 - **Aplicar conocimientos:** reforzarás tu aprendizaje mediante la solución de un problema sencillo.
 
-## Actividad 1
+# **Actividad 1**
 
-### Orientación y primer vistazo al entorno gráfico
+# **Orientación y primer vistazo al entorno gráfico**
 
 **🎯 Enunciado**
 En esta actividad vas a descargar y ejecutar un ejemplo básico introductorio a OpenGL. La idea de esta actividad es solo que pongas a funcionar el ejemplo. No es necesario que entiendas el código en este momento, pero sí que observes de manera general el programa. En la fase de investigación vas a profundizar en el código y en los conceptos de OpenGL.
@@ -24,22 +24,19 @@ En esta actividad vas a descargar y ejecutar un ejemplo básico introductorio a 
 **Ejemplo simple de un triángulo en OpenGL:**
 
 1. Abre y explora el programa:
-
 - Descarga el proyecto que está en [este repositorio de GitHub](https://github.com/juanferfranco/triangle)
 - Descomprime y abre el archivo de solución (`.sln`) de Visual Studio proporcionado.
 - Observa la estructura del proyecto en el Explorador de Soluciones e identifica el archivo de C++ `.cpp`.
-
 1. Compila y ejecuta el ejemplo
 
-## 🧐🧪✍️ Reporta en tu bitácora
-
+**🧐🧪✍️ Reporta en tu bitácora**
 1. Incluye una captura de pantalla del ejemplo funcionando en tu máquina.
 2. Observa el proyecto, trata de entenderlo, pero ten presente que lo analizaremos más adelante.
 3. ¿Qué preguntas te surgen al ver el código? Anota al menos tres preguntas que te gustaría investigar más adelante (no te preocupes que la idea de esta unidad es que las resuelvas).
 
-## Actividad 02
+# **Actividad 02**
 
-## ¿Cómo se crea un proyecto OpenGL en Windows?
+# **¿Cómo se crea un proyecto OpenGL en Windows?**
 
 **🎯 Enunciado**
 En esta actividad vas a entender que necesitas para que un programa OpenGL funcione en Windows. No olvides agregar al proyecto el archivo triangle.cpp de la actividad anterior para que puedas ver el ejemplo del triángulo simple funcionando en el proyecto que creaste una vez esté configurado correctamente.
@@ -53,7 +50,7 @@ Lo primero que necesitas es crear un proyecto vacío (Empty project) en C++ en V
 Volvamos pues a la pregunta inicial: **¿Cómo se crean un proyecto OpenGL en Windows?** Una vez que tienes el proyecto vacío creado, lo vas a buscar en el explorador de archivos de Windows. Vas a crear una carpeta llamada **external** (observa en el ejemplo del triángulo simple esta carpeta y su contenido). Dentro de esa carpeta guardarás las dependencias de tu proyecto. Para hacer esto, crea estas carpetas, que son las que contienen las dependencias de tu proyecto:
 
 <aside>
-<img src="/icons/reorder_lightgray.svg" alt="/icons/reorder_lightgray.svg" width="40px" />
+<img src="https://app.notion.com/icons/reorder_lightgray.svg" alt="https://app.notion.com/icons/reorder_lightgray.svg" width="40px" />
 
 ```cpp
 glfw34
@@ -66,7 +63,7 @@ glm-101-light
 ¿Qué dependencias necesitas y por qué? Comencemos con **GLFW**. Esta es una biblioteca que te permite crear ventanas y manejar eventos de entrada (teclado, ratón, etc.). [GLFW](https://www.glfw.org/) es una biblioteca multiplataforma, lo que significa que puedes usarla en Windows, Linux y MacOS. Para conseguir la biblioteca, lo que necesitas es ir al repositorio en Github y descargar el archivo glfw-3.4.bin.WIN64.zip que está en la sección de releases. Descomprime el archivo y guarda las siguientes carpetas en glfw34:
 
 <aside>
-<img src="/icons/reorder_lightgray.svg" alt="/icons/reorder_lightgray.svg" width="40px" />
+<img src="https://app.notion.com/icons/reorder_lightgray.svg" alt="https://app.notion.com/icons/reorder_lightgray.svg" width="40px" />
 
 ```basic
 include
@@ -154,8 +151,8 @@ GLFW
 
 - Biblioteca multiplataforma para **crear ventanas**, manejar el **teclado**, el **mouse** y gestionar el contexto OpenGL.
 - Requiere dos archivos:
-  - `glfw3.lib`: le dice al compilador dónde están las funciones de GLFW.
-  - `glfw3.dll`: contiene el **código real** que se usa en tiempo de ejecución.
+    - `glfw3.lib`: le dice al compilador dónde están las funciones de GLFW.
+    - `glfw3.dll`: contiene el **código real** que se usa en tiempo de ejecución.
 
 <aside>
 💡
@@ -288,7 +285,7 @@ Este tamaño puede ser diferente al tamaño de la ventana en píxeles, especialm
 Aquí te estarás preguntando, cuando se dice que OpenGL dibuja en el framebuffer, ¿Qué significa eso? ¿No se supone que quien dibuja es la GPU? Entonces **¿Quién dibuja: la GPU o OpenGL?** La respuesta corta es:
 
 > La GPU es quien realmente dibuja, y OpenGL es la API que le dice a la GPU qué y cómo dibujar.
->
+> 
 
 Entonces repasemos un poco:
 
@@ -402,8 +399,8 @@ Esta línea define el viewport, que es el área del framebuffer donde OpenGL dib
 
 ```cpp
 while (!glfwWindowShouldClose(mainWindow)){    
-  // 11) Manejo de eventos    
-  glfwPollEvents();
+		// 11) Manejo de eventos    
+		glfwPollEvents();
     // 12) Procesa la entrada    
     processInput(mainWindow);
     // 13) Configura el color de fondo y limpia el framebuffer    
@@ -501,7 +498,6 @@ Esta parte del código se encarga de limpiar los recursos utilizados por OpenGL 
 
 **🧐🧪✍️ Reporta en tu bitácora**
 Vamos a terminar esta actividad con un nuevo momento de consolidación parcial. Hay algunos conceptos relacionados con los shaders y el pipeline de OpenGL que no hemos visto en detalle, pero no te preocupes, los vamos a trabajar en la siguiente actividad. Por ahora, quiero que te concentres en lo que has aprendido hasta aquí. Explica con tus propias palabras los siguientes conceptos. Puedes usar ejemplos, analogías o diagramas para ilustrar tus respuestas. Es importante que intentes responder estos conceptos sin ver inicialmente tus notas. Trata de ejercitar tu memoria y tu comprensión. Luego, puedes revisar tus notas para completar o corregir lo que hayas escrito.
-
 1. ¿Qué es el contexto OpenGL?
 2. ¿Cuál es el rol de la biblioteca GLFW y qué ventaja tiene usarla?
 3. ¿Por qué crees que OpenGL necesita un contexto (recuerda la analogía del taller de arte)?
@@ -541,7 +537,6 @@ Luego de estudiar las unidades 1 y 2 de este curso y ver el video, escribe con t
 
 **🧐✍️ Reporta en tu bitácora**
 Es momento de practicar la técnica de **aprender a aprender** que te he venido mostrando de manera insistente a lo largo del curso. Te voy a proponer una serie de preguntas para que reflexiones y escribas en tu bitácora. Trata de responder de memoria a cada pregunta. No busques la respuesta en el video. Trata de recordar lo que viste. De todas maneras si no lo logras hacer, regresa al video y busca la respuesta.
-
 1. ¿Cuáles son los tres pasos claves del pipeline de OpenGL? Explica en tus propias palabras cuál es el objetivo de cada paso.
 2. La gran novedad que introduce OpenGL moderno es el pipeline programable. ¿Qué significa esto? ¿Qué diferencia hay entre el pipeline fijo y el programable? ¿Qué ventajas le ves a esto? y si el pipeline es programable, ¿Qué tengo que programar?
 3. Si fueras a describir el proceso de **rasterización** ¿Qué dirías?
@@ -592,19 +587,19 @@ Observa en la gráfica que lo primero que se recibe son los datos de los vértic
 
 ```cpp
 void setupTriangle() {  
-  float vertices[] = {    
-    -0.5f, -0.5f, 0.0f,     
-    0.5f, -0.5f, 0.0f,     
-    0.0f,  0.5f, 0.0f  
-    };
-   glGenVertexArrays(1, &VAO);  
-   glGenBuffers(1, &VBO);
-   glBindVertexArray(VAO);  
-   glBindBuffer(GL_ARRAY_BUFFER, VBO);  
-   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);  
-   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);  
-   glEnableVertexAttribArray(0);  glBindVertexArray(0);
-   }
+		float vertices[] = {    
+				-0.5f, -0.5f, 0.0f,     
+				0.5f, -0.5f, 0.0f,     
+				0.0f,  0.5f, 0.0f  
+				};
+	  glGenVertexArrays(1, &VAO);  
+	  glGenBuffers(1, &VBO);
+	  glBindVertexArray(VAO);  
+	  glBindBuffer(GL_ARRAY_BUFFER, VBO);  
+	  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);  
+	  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);  
+	  glEnableVertexAttribArray(0);  glBindVertexArray(0);
+	  }
 ```
 
 Nota que lo primero que hacemos es definir los vértices del triángulo. Luego, creamos un **objeto VAO** (Vertex Array Object) y un **VBO** (Vertex Buffer Object). El objeto VAO es un objeto OpenGL que contiene la configuración de los atributos de los vértices y el objeto VBO es un objeto OpenGL que contiene los datos de los vértices. Fíjate que luego de crear los objetos para obtener el ID, hacemos un binding del VAO y del VBO. Esto significa que todos los comandos que se envían a OpenGL se aplican a estos objetos. Luego, enviamos los datos de los vértices al buffer de vértices (VBO) y configuramos los atributos de los vértices. Finalmente, hacemos un UNBINDING del VAO.
@@ -629,13 +624,13 @@ Cada uno de los parámetros de la función `glVertexAttribPointer` se puede en
 
 ```cpp
 glVertexAttribPointer(    
-  GLuint index,            // Atributo del shader (layout(location = index))    
-  GLint size,              // Componentes por vértice (1–4)    
-  GLenum type,             // Tipo de dato (GL_FLOAT, GL_INT, etc.)    
-  GLboolean normalized,    // ¿Normalizar datos enteros?    
-  GLsizei stride,          // Espaciado (en bytes) entre vértices    
-  const void* pointer    // Desplazamiento inicial dentro del VBO
-  );
+		GLuint index,            // Atributo del shader (layout(location = index))    
+		GLint size,              // Componentes por vértice (1–4)    
+		GLenum type,             // Tipo de dato (GL_FLOAT, GL_INT, etc.)    
+		GLboolean normalized,    // ¿Normalizar datos enteros?    
+		GLsizei stride,          // Espaciado (en bytes) entre vértices    
+		const void* pointer   	// Desplazamiento inicial dentro del VBO
+		);
 ```
 
 ```cpp
@@ -654,10 +649,10 @@ Ahora, observa de nuevo las posiciones de los vértices:
 
 ```cpp
 float vertices[] = {  
-  -0.5f, -0.5f, 0.0f,   
-  0.5f, -0.5f, 0.0f,   
-  0.0f,  0.5f, 0.0f
-  };
+		-0.5f, -0.5f, 0.0f,   
+		0.5f, -0.5f, 0.0f,   
+		0.0f,  0.5f, 0.0f
+		};
 ```
 
 No te has preguntado ¿Cómo hago para definir los vértices? ¿Qué significa cada número? ¿Por qué son esos números? En OpenGL, los vértices se definen en un espacio de **coordenadas de dispositivo normalizadas** (NDC). Esto significa que las coordenadas van de -1 a 1. En este caso, el primer vértice está en la esquina inferior izquierda (-0.5, -0.5), el segundo vértice está en la esquina inferior derecha (0.5, -0.5) y el tercer vértice está en la parte superior (0, 0.5). Te lo aclaro con una figura:
@@ -674,8 +669,8 @@ Ahora, al observar el código de la función `buildShaderProgram()` verás que
 #version 460 core
 layout(location = 0) in vec3 aPos;
 void main() {  
-  gl_Position = vec4(aPos, 1.0);
-  }
+		gl_Position = vec4(aPos, 1.0);
+		}
 ```
 
 **Fragment shader:**
@@ -684,8 +679,8 @@ void main() {
 #version 460 core
 out vec4 FragColor;
 void main() {  
-  FragColor = vec4(1.0, 0.5, 0.2, 1.0);
-  }
+		FragColor = vec4(1.0, 0.5, 0.2, 1.0);
+		}
 ```
 
 Analicemos el código del vertex shader. Este shader se ejecuta en la GPU y recibe los datos de los vértices. En este caso, estamos usando un solo atributo de vértice (la posición). El shader toma la posición del vértice y la convierte en un vector de cuatro componentes (x, y, z, w). El componente w se establece en 1.0 porque estamos trabajando en un espacio de coordenadas homogéneo. Luego, el shader asigna este vector a la variable `gl_Position`, que es una variable predefinida en OpenGL que representa la posición del vértice en el espacio de clip. El espacio de clip (clip space) es el espacio de coordenadas justo antes de que OpenGL haga el clipping y la proyección en pantalla. En otras palabras: es el espacio donde deben estar las posiciones de los vértices antes de ser recortados por el frustum de visión (el volumen visible de la cámara) y antes de transformarse en coordenadas de pantalla (viewport).
@@ -739,7 +734,6 @@ Esta línea asigna un color fijo (naranja) a la variable `FragColor`. La funci�
 
 **🧐✍️ Reporta en tu bitácora**
 Es momento de hacer digestión cognitiva. Debemos parar de nuevo en este punto y consolidar. Para ello te pediré que hagas lo siguiente:
-
 1. Escribe un resumen en tus propias palabras de lo que se necesita para dibujar un triángulo en OpenGL.
 2. Escribe un resumen en tus propias palabras de lo que necesitas para poder usar un shader en OpenGL.
 
@@ -753,11 +747,11 @@ Estos serán los vértices:
 
 ```cpp
 float vertices[] = {  
-  //  pos               color               offset  
-  -1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 0.0f,   0.1f, 0.5f,    
-  0.0f, -1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   0.2f, 0.5f,    
-  -0.5f,  -0.5f, 0.0f,   0.5f, 0.5f, 0.0f,   0.15f, 0.75f,
-  };
+		//  pos               color               offset  
+		-1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 0.0f,   0.1f, 0.5f,    
+		0.0f, -1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   0.2f, 0.5f,    
+		-0.5f,  -0.5f, 0.0f,   0.5f, 0.5f, 0.0f,   0.15f, 0.75f,
+		};
 ```
 
 Estos serían los 3 shaders:
@@ -767,8 +761,8 @@ Shader A:
 ```cpp
 layout(location = 0) in vec3 aPos;
 void main() {    
-  gl_Position = vec4(aPos, 1.0);
-  }
+		gl_Position = vec4(aPos, 1.0);
+		}
 ```
 
 Shader B:
@@ -776,8 +770,8 @@ Shader B:
 ```cpp
 layout(location = 1) in vec3 aColor;
 void main() {    
-  gl_Position = vec4(aColor * 0.5, 1.0); // usar color como posición "falsa"
-  }
+		gl_Position = vec4(aColor * 0.5, 1.0); // usar color como posición "falsa"
+		}
 ```
 
 Shader C:
@@ -785,8 +779,8 @@ Shader C:
 ```cpp
 layout(location = 2) in vec2 aOffset;
 void main() {    
-  gl_Position = vec4(aOffset, 0.0, 1.0);
-  }
+		gl_Position = vec4(aOffset, 0.0, 1.0);
+		}
 ```
 
 Ahora, al momento de hacer la configuración del VAO y el VBO harías esto:
@@ -839,14 +833,17 @@ glDrawArrays(GL_TRIANGLES, 0, 3);
 
 ¿Pudiste notar entonces cómo se usa glEnableVertexAttribArray? Observa que en cada draw call habilitamos solo el atributo que vamos a usar.
 
+<aside>
+📤
+
 **🧐🧪✍️ Reporta en tu bitácora**
 Implementa el código anterior en tu máquina y captura pantalla del resultado. Pero antes de hacerlo trata de predecir qué va a pasar.
 
 </aside>
 
-## Actividad 05
+# **Actividad 05**
 
-### Triángulo interactivo
+# **Triángulo interactivo**
 
 **🎯 Enunciado**
 En esta actividad vas a modificar el ejemplo del triángulo simple para que sea interactivo. La idea es que puedas cambiar el color del triángulo y su posición en la pantalla pasando información desde el código C++ a los shaders.
@@ -863,11 +860,11 @@ Vamos a modificar los vertex y fragment shaders para que acepten estos `uniform
 #version 460 core
 layout(location = 0) in vec3 aPos;uniform vec2 offset;
 void main() {    
-  vec3 newPos = aPos;    
-  newPos.x += offset.x;    
-  newPos.y += offset.y;    
-  gl_Position = vec4(newPos, 1.0);
-  }
+		vec3 newPos = aPos;    
+		newPos.x += offset.x;    
+		newPos.y += offset.y;    
+		gl_Position = vec4(newPos, 1.0);
+		}
 ```
 
 ```cpp
@@ -875,8 +872,8 @@ void main() {
 out vec4 FragColor;
 uniform vec4 ourColor;
 void main() {    
-  FragColor = ourColor;
-  }
+		FragColor = ourColor;
+		}
 ```
 
 En el vertex shader, estamos usando un `uniform` llamado `offset` para modificar la posición del triángulo. En el fragment shader, estamos usando un `uniform` llamado `ourColor` para modificar el color del triángulo.
@@ -917,8 +914,7 @@ En este código, estamos obteniendo la posición del mouse y normalizándola par
 <aside>
 📤
 
-## 🧐🧪✍️ Reporta en tu bitácora
-
+**🧐🧪✍️ Reporta en tu bitácora**
 1. Modifica el código del triángulo para que sea interactivo.
 2. Incluye una captura de pantalla del triángulo interactivo funcionando en tu máquina.
 3. Explica el proceso de normalización de las coordenadas del mouse y cómo se relaciona con el sistema de coordenadas de OpenGL.
@@ -927,17 +923,17 @@ En este código, estamos obteniendo la posición del mouse y normalizándola par
 </aside>
 
 1. 1. Modifica el código del triángulo para que sea interactivo.
-2. 1. Incluye una captura de pantalla del triángulo interactivo funcionando en tu máquina.
-3. 1. Explica el proceso de normalización de las coordenadas del mouse y cómo se relaciona con el sistema de coordenadas de OpenGL.
-4. 1. Explica el proceso de normalización a coordenadas de dispositivo (NDC) y cómo se relaciona con el sistema de coordenadas de OpenGL.
+2. 2. Incluye una captura de pantalla del triángulo interactivo funcionando en tu máquina.
+3. 3. Explica el proceso de normalización de las coordenadas del mouse y cómo se relaciona con el sistema de coordenadas de OpenGL.
+4. 4. Explica el proceso de normalización a coordenadas de dispositivo (NDC) y cómo se relaciona con el sistema de coordenadas de OpenGL.
 
-## Apply: Aplicación 🛠
+# **Apply: Aplicación 🛠**
 
 En esta fase vas a aplicar lo que aprendiste en la fase de investigación. Te voy a proponer un problema sencillo para que repases los conceptos de la fase de investigación.
 
-## Actividad 06
+# **Actividad 06**
 
-## Aplica lo aprendido en esta unidad
+# **Aplica lo aprendido en esta unidad**
 
 **🎯 Enunciado**
 ¡Es hora de poner en práctica lo aprendido! En la actividad anterior, hiciste que el triángulo respondiera a la posición del mouse. Ahora, vamos a dar un paso más allá y a introducir un elemento dinámico que no dependa directamente de tu interacción: el tiempo.
@@ -953,8 +949,7 @@ Tu misión es modificar el ejemplo del triángulo simple (puedes partir del resu
 <aside>
 📤
 
-### 🧐🧪✍️ Reporta en tu bitácora
-
+**🧐🧪✍️ Reporta en tu bitácora**
 1. Describe brevemente los cambios que realizaste en el código C++ (dónde obtienes el tiempo, cómo y dónde actualizas el uniform).
 2. Pega el código modificado de tu *fragment shader*.
 3. Explica cómo usaste la función de tiempo (`sin`, `cos`, u otra) para lograr el efecto de cambio de color cíclico. ¿Qué rango de valores produce tu cálculo y cómo afecta eso al color final?
@@ -963,7 +958,7 @@ Tu misión es modificar el ejemplo del triángulo simple (puedes partir del resu
 
 </aside>
 
-## Evidencias 🗂️
+# **Evidencias 🗂️**
 
 **RUBRICA!**
 • Recuerda que la bitácora se cierra el miércoles 13 de mayo a las 18.00 horas. No olvides que el aprendizaje es un proceso que se plasma en la bitácora. La bitácora no es un resultado que se llena a última hora.
@@ -978,14 +973,13 @@ Tu misión es modificar el ejemplo del triángulo simple (puedes partir del resu
 0.5: realicé 1 actividad completa.
 0: no realicé ninguna actividad.
 
-## EVIDENCIAS EN BITÁCORA
-
+**EVIDENCIAS EN BITÁCORA**
 1. Realiza las actividades propuestas en esta unidad y documenta todo el proceso en tu bitácora.
 2. Realiza la autoevaluación indicando:
     ◦ Tu nota propuesta.
     ◦ La defensa de esa nota para cada actividad.
 
-## Reflect: Consolidación y metacognición 🤔
+# **Reflect: Consolidación y metacognición 🤔**
 
 1. En una hoja de papel o un white board digital te pediré que hagas un inventario de todo los conceptos de esta unidad que puedas recordar. Luego construye un diagrama donde ubiques todos los conceptos, tratando de agruparlos y relacionarlos entre sí.
 2. Pregúntate: ¿Qué conceptos domino bien? ¿Cuáles me cuestan más trabajo?
