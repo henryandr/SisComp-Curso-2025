@@ -1,6 +1,6 @@
 # Unidad 1 · Arquitectura del computador y programación en ensamblador
 
-## Archivo 2: Programación en ensamblador e entrada/salida
+## Archivo 2: Programación en ensamblador y entrada/salida
 
 ### Propósito
 Profundizar en el lenguaje ensamblador de Hack para modelar control de flujo, operaciones con la ALU y acceso a memoria mapeada para interacción básica.
