@@ -1,76 +1,269 @@
 # Unidad 2 · Memoria, objetos y estructuras de datos en C++
 
-## Archivo 2: Objetos, punteros y ciclo de vida
+## Sesión 3. Experimentos sobre segmentos de memoria
 
-### Propósito
-Profundizar en el comportamiento de objetos y memoria para conectar representación interna, copia, paso a funciones y duración de los datos.
+### ¿Qué aprenderás en esta sesión? 💡
 
-### Sesiones cubiertas
-- Sesión 3. Experimentos de memoria y efectos de modificar distintos segmentos.
-- Sesión 4. Objetos en stack y heap; copia de objetos y paso de objetos a funciones.
-- Sesión 5. Miembros de instancia, miembros estáticos y ciclo de vida de objetos.
+- Contrastar el comportamiento de distintas regiones de memoria.
+- Formular hipótesis antes de ejecutar programas.
+- Reconocer riesgos conceptuales como escritura inválida, referencias colgantes y fugas.
+- Conectar observación experimental con el mapa de memoria.
 
-### Resultados de aprendizaje
-- Comparar efectos de modificar stack, heap y datos estáticos.
+### Actividad 5: Experimentos guiados sobre memoria
+
+A partir del programa de la sesión anterior, realiza pequeños cambios y observa qué ocurre. No busques “hacer que funcione”; busca explicar el resultado.
+
+#### Experimento A: variable local estática vs. no estática
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void prueba() {
+    static int contadorEstatico = 0;
+    int contadorLocal = 0;
+    contadorEstatico++;
+    contadorLocal++;
+    cout << contadorEstatico << ", " << contadorLocal << endl;
+}
+
+int main() {
+    prueba();
+    prueba();
+    prueba();
+}
+```
+
+#### Experimento B: reserva dinámica y liberación
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* p = new int(25);
+    cout << *p << endl;
+    delete p;
+}
+```
+
+#### Experimento C: dirección de una variable local al salir de una función
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int* direccionInvalida() {
+    int local = 10;
+    return &local;
+}
+
+int main() {
+    int* p = direccionInvalida();
+    cout << p << endl;
+}
+```
+
+<aside>
+📤
+
+**Bitácora**
+
+- Antes de ejecutar cada experimento, escribe tu hipótesis.
+- Explica qué datos persisten entre llamadas y cuáles no.
+- Describe por qué devolver la dirección de una variable local es conceptualmente peligroso.
+- Resume qué diferencias observaste entre stack, datos estáticos y heap.
+
+</aside>
+
+## Sesión 4. Objetos en stack y heap; copia y paso de objetos
+
+### ¿Qué aprenderás en esta sesión? 💡
+
 - Distinguir objetos automáticos y dinámicos.
-- Explicar copia, aliasing y paso de objetos.
-- Analizar el ciclo de vida de instancias y miembros estáticos.
+- Observar qué significa copiar un objeto en C++.
+- Comparar paso por valor, referencia y puntero usando objetos.
+- Relacionar constructores y destructores con el ciclo de vida de los datos.
 
-## Sesión 3. Experimentos de memoria
+### Actividad 6: Crear un objeto en el stack y observarlo
 
-### Objetivo
-Observar de forma experimental cómo se comportan las distintas regiones de memoria cuando se crean, modifican y destruyen datos.
+```cpp
+#include <iostream>
+using namespace std;
 
-### Temas centrales
-- Variables locales, globales y estáticas.
-- Reserva y liberación de memoria dinámica.
-- Riesgos conceptuales: referencias colgantes y fugas.
-- Efecto de la salida de una función sobre el stack.
+class Punto {
+public:
+    int x;
+    int y;
 
-### Actividades sugeridas
-- Modificar programas cortos y predecir el resultado.
-- Comparar qué datos persisten y cuáles desaparecen.
-- Registrar hipótesis antes de ejecutar cada experimento.
+    Punto(int _x, int _y) : x(_x), y(_y) {
+        cout << "Constructor: Punto(" << x << ", " << y << ") creado." << endl;
+    }
 
-### Evidencias
-- Bitácora de predicción, observación y conclusión.
+    ~Punto() {
+        cout << "Destructor: Punto(" << x << ", " << y << ") destruido." << endl;
+    }
+};
 
-## Sesión 4. Objetos en stack y heap
+int main() {
+    Punto p(10, 20);
+}
+```
 
-### Objetivo
-Comprender cómo se crean, copian y comparten objetos según su forma de almacenamiento.
+Ejecuta en depuración y observa:
 
-### Temas centrales
-- Construcción de objetos automáticos.
-- Creación dinámica con punteros.
-- Copia superficial como problema conceptual inicial.
-- Paso de objetos por valor y por referencia.
+- el momento en que se construye `p`
+- la dirección de memoria de `p`
+- el momento en que su destructor se ejecuta
 
-### Actividades sugeridas
-- Comparar dos versiones de una misma clase: stack y heap.
-- Pasar objetos a funciones y observar copias.
-- Explicar cuándo dos variables refieren al mismo objeto y cuándo no.
+### Actividad 7: Compara stack y heap
 
-### Evidencias
-- Diagrama de objetos y referencias.
-- Explicación del efecto de copiar un objeto en un caso concreto.
+```cpp
+#include <iostream>
+using namespace std;
 
-## Sesión 5. Miembros estáticos y ciclo de vida
+class Punto {
+public:
+    int x;
+    int y;
 
-### Objetivo
-Relacionar la vida útil de los objetos con sus atributos, su clase y el contexto donde fueron creados.
+    Punto(int _x, int _y) : x(_x), y(_y) {}
+    ~Punto() {}
+};
 
-### Temas centrales
-- Miembros de instancia frente a miembros estáticos.
-- Constructores y destructores como eventos observables.
-- Estado compartido entre objetos de una misma clase.
-- Persistencia más allá de una instancia particular.
+int main() {
+    Punto pStack(30, 40);
+    Punto* pHeap = new Punto(50, 60);
+    delete pHeap;
+}
+```
 
-### Actividades sugeridas
-- Diseñar una clase con contador estático de instancias.
-- Observar el orden de creación y destrucción.
-- Comparar datos propios del objeto con datos compartidos por la clase.
+Analiza qué es exactamente `pStack` y qué es exactamente `pHeap`.
 
-### Evidencias
-- Tabla de ciclo de vida por objeto.
-- Reflexión sobre diseño y responsabilidad del estado compartido.
+### Actividad 8: Copia y paso de objetos
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Punto {
+public:
+    string nombre;
+    int x;
+    int y;
+
+    Punto(string n, int _x, int _y) : nombre(n), x(_x), y(_y) {}
+};
+
+void cambiarNombrePorValor(Punto p, string nuevoNombre) {
+    p.nombre = nuevoNombre;
+}
+
+void cambiarNombrePorReferencia(Punto& p, string nuevoNombre) {
+    p.nombre = nuevoNombre;
+}
+
+void cambiarNombrePorPuntero(Punto* p, string nuevoNombre) {
+    p->nombre = nuevoNombre;
+}
+
+int main() {
+    Punto original("original", 70, 80);
+    cambiarNombrePorValor(original, "valor");
+    cambiarNombrePorReferencia(original, "referencia");
+    cambiarNombrePorPuntero(&original, "puntero");
+}
+```
+
+<aside>
+📤
+
+**Bitácora**
+
+- Explica en qué caso el objeto original cambia y en cuál no.
+- Dibuja el caso de copia por valor y compáralo con alias por referencia.
+- Describe la diferencia entre “objeto” y “puntero a objeto”.
+- Escribe una conclusión breve sobre qué significa copiar un objeto en C++.
+
+</aside>
+
+## Sesión 5. Miembros estáticos y ciclo de vida de los objetos
+
+### ¿Qué aprenderás en esta sesión? 💡
+
+- Diferenciar datos propios de cada instancia y datos compartidos por la clase.
+- Observar el orden de construcción y destrucción.
+- Relacionar alcance, duración y destrucción automática.
+- Explicar por qué algunos objetos se destruyen al salir de un bloque y otros no.
+
+### Actividad 9: Miembros estáticos frente a miembros de instancia
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Contador {
+public:
+    int valor;
+    static int total;
+
+    Contador(int v = 0) : valor(v) {
+        total++;
+    }
+
+    void incrementar() {
+        valor++;
+    }
+};
+
+int Contador::total = 0;
+
+int main() {
+    Contador c1(5);
+    Contador c2(10);
+    Contador* c3 = new Contador(15);
+
+    c1.incrementar();
+    c2.incrementar();
+    c3->incrementar();
+
+    delete c3;
+}
+```
+
+### Actividad 10: Ciclo de vida dentro y fuera de bloques
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Punto {
+public:
+    Punto(int, int) { cout << "constructor" << endl; }
+    ~Punto() { cout << "destructor" << endl; }
+};
+
+int main() {
+    {
+        Punto pBloque(100, 200);
+    }
+
+    Punto* pDinamico = new Punto(300, 400);
+    delete pDinamico;
+}
+```
+
+Luego modifica el programa para declarar un puntero fuera de un bloque e inicializarlo dentro del bloque. Analiza por qué el puntero puede seguir existiendo aunque el bloque termine, y por qué eso no significa lo mismo que la vida del objeto al que apunta.
+
+<aside>
+📤
+
+**Bitácora**
+
+- Explica dónde vive `Contador::total` y dónde vive `valor`.
+- Describe el ciclo de vida de `c1`, `c2` y el objeto apuntado por `c3`.
+- Compara destrucción automática y destrucción manual.
+- Explica con tus palabras qué significa que un puntero siga existiendo pero el objeto ya no exista.
+
+</aside>
