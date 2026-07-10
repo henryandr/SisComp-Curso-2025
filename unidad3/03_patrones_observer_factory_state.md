@@ -1,77 +1,132 @@
 # Unidad 3 · Programación orientada a objetos y patrones de diseño
 
-## Archivo 3: Patrones Observer, Factory y State
+## Sesión 5. Herencia, composición y organización de objetos
 
-### Propósito
-Presentar patrones de diseño como soluciones reutilizables para organizar variación, comunicación y cambio de comportamiento dentro de un mismo sistema.
+### ¿Qué aprenderás en esta sesión? 💡
 
-### Sesiones cubiertas
-- Sesión 5. Herencia simple/múltiple y organización de objetos en memoria.
-- Sesión 6. Polimorfismo en tiempo de ejecución y despacho dinámico.
-- Sesión 7. Patrones Observer, Factory y State aplicados a un mismo sistema.
+- Evaluar cuándo una jerarquía aporta claridad y cuándo agrega complejidad.
+- Comparar herencia con composición como decisiones de diseño.
+- Relacionar diseño de clases con mantenibilidad.
 
-### Resultados de aprendizaje
-- Analizar cómo la herencia reorganiza la representación de objetos.
-- Usar polimorfismo para desacoplar comportamiento.
-- Reconocer problemas de diseño que justifican patrones.
-- Comparar Observer, Factory y State dentro de un caso compartido.
+### Actividad 10: Compara alternativas de modelado
 
-## Sesión 5. Herencia y memoria
+Supón que tienes un sistema interactivo con entidades visuales. Diseña dos alternativas:
 
-### Objetivo
-Observar cómo cambia la organización del objeto cuando se extiende una clase y cómo esa decisión impacta diseño y mantenimiento.
+1. una basada en una clase base `Entity` y varias derivadas,
+2. otra basada en composición de comportamientos.
 
-### Temas centrales
-- Herencia simple y múltiple como conceptos de modelado.
-- Atributos heredados y atributos agregados.
-- Riesgos de complejidad innecesaria.
-- Relación entre jerarquía y claridad del sistema.
+Para cada alternativa responde:
 
-### Actividades sugeridas
-- Comparar varias alternativas de jerarquía.
-- Dibujar objetos base y derivados en memoria.
-- Discutir cuándo una relación de herencia es apropiada.
+- ¿qué responsabilidades quedan más claras?
+- ¿qué cambios serían más fáciles de hacer?
+- ¿dónde se concentra más acoplamiento?
+- ¿qué opción elegirías para un sistema pequeño que luego crecerá?
 
-### Evidencias
-- Propuesta razonada de jerarquía.
-- Esquema comparativo de organización en memoria.
+## Sesión 6. Polimorfismo y despacho dinámico en colecciones
 
-## Sesión 6. Polimorfismo y despacho dinámico
+### ¿Qué aprenderás en esta sesión? 💡
 
-### Objetivo
-Usar polimorfismo para expresar comportamientos variables bajo una interfaz común.
+- Usar una interfaz común para operar sobre objetos distintos.
+- Explicar el valor del polimorfismo en sistemas extensibles.
+- Analizar colecciones heterogéneas sin depender del tipo concreto.
 
-### Temas centrales
-- Sustitución de objetos derivados por referencias a base.
-- Despacho dinámico.
-- Colecciones heterogéneas de objetos.
-- Extensibilidad sin modificar código cliente central.
+### Actividad 11: Colección heterogénea
 
-### Actividades sugeridas
-- Analizar una colección de entidades con comportamiento distinto.
-- Predecir el resultado de una llamada polimórfica.
-- Justificar por qué el cliente no necesita conocer la clase concreta.
+Analiza este fragmento:
 
-### Evidencias
-- Explicación del flujo polimórfico en un ejemplo.
-- Tabla de comportamientos por tipo concreto.
+```cpp
+#include <memory>
+#include <vector>
+using namespace std;
 
-## Sesión 7. Patrones de diseño aplicados
+class Entity {
+public:
+    virtual ~Entity() = default;
+    virtual void update() = 0;
+};
 
-### Objetivo
-Aplicar tres patrones clásicos a un único caso de estudio para diferenciar claramente el problema que resuelve cada uno.
+class Enemy : public Entity {
+public:
+    void update() override {}
+};
 
-### Temas centrales
-- Observer para notificación entre objetos.
-- Factory para creación desacoplada.
-- State para cambio de comportamiento según estado interno.
-- Comparación entre comunicación, creación y control de estados.
+class NPC : public Entity {
+public:
+    void update() override {}
+};
 
-### Actividades sugeridas
-- Extender un sistema con eventos, tipos de entidades y modos de comportamiento.
-- Ubicar cada patrón en el punto del sistema donde más valor aporta.
-- Comparar una versión ad hoc con una versión basada en patrones.
+int main() {
+    vector<unique_ptr<Entity>> entities;
+    entities.push_back(make_unique<Enemy>());
+    entities.push_back(make_unique<NPC>());
 
-### Evidencias
-- Explicación del rol de cada patrón en el sistema.
-- Diagrama simple de interacción entre objetos.
+    for (auto& entity : entities) {
+        entity->update();
+    }
+}
+```
+
+Responde:
+
+- ¿Qué ventaja tiene que `main` trabaje con `Entity` y no con cada clase concreta?
+- ¿Qué tendrías que cambiar para añadir un nuevo tipo `Boss`?
+- ¿Qué parte del código cliente permanece estable gracias al polimorfismo?
+
+## Sesión 7. Observer, Factory y State en un mismo caso
+
+### ¿Qué aprenderás en esta sesión? 💡
+
+- Reconocer tres problemas clásicos de diseño.
+- Elegir el patrón según el tipo de variación que quieres manejar.
+- Diferenciar creación, comunicación y cambio de comportamiento.
+
+### Actividad 12: Identifica el problema antes del patrón
+
+Antes de nombrar patrones, relaciona cada situación con el problema que resuelve:
+
+- Quieres avisar a varios objetos cuando cambia un evento.
+- Quieres crear variantes de un objeto sin repartir `new` por todo el programa.
+- Quieres que un objeto cambie su comportamiento según su estado actual.
+
+### Actividad 13: Observer
+
+Piensa en una aplicación donde una clase principal recibe entrada del usuario y varias entidades reaccionan a ella.
+
+Responde:
+
+- ¿quién sería el sujeto?
+- ¿quiénes serían los observadores?
+- ¿qué evento se notificaría?
+- ¿qué pasaría si la clase principal tuviera que cambiar manualmente cada objeto uno por uno?
+
+### Actividad 14: Factory
+
+Supón que el sistema puede crear `star`, `planet` y `shooting_star`.
+
+Responde:
+
+- ¿qué gana el sistema si toda la construcción vive en una sola factory?
+- ¿qué se modifica cuando aparece un nuevo tipo?
+- ¿qué parte del código cliente no debería cambiar?
+
+### Actividad 15: State
+
+Imagina una partícula que puede estar en modo `normal`, `attract`, `repel` o `stop`.
+
+Responde:
+
+- ¿qué problema aparece si todo eso se resuelve con un `switch` enorme dentro de una sola clase?
+- ¿qué cambia si cada estado se mueve a una clase diferente?
+- ¿qué responsabilidad tendría el contexto y cuál tendría cada estado concreto?
+
+<aside>
+📤
+
+**Bitácora**
+
+- Construye una tabla comparativa entre Observer, Factory y State.
+- Para cada patrón, escribe: problema, idea central, ventaja principal y ejemplo en el caso de estudio.
+- Dibuja al menos un diagrama simple de interacción o de estados.
+- Explica cuál de los tres patrones te parece más útil para extender un sistema interactivo y por qué.
+
+</aside>
