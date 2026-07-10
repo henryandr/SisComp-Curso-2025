@@ -11,12 +11,14 @@ Aprenderás la relación entre el lenguaje ensamblador y un lenguaje de alto niv
 **Enunciado**: considera el siguiente programa:
 
 ```cpp
-//Adds 1+...+100. int i=1; int sum=0;
- while(i <=100)
-	 {
-	 sum += i;
-	 i++;
-	 }
+//Adds 1+...+100.
+int i=1;
+int sum=0;
+while(i <=100)
+{
+	sum += i;
+	i++;
+}
 ```
 
 Una traducción a ensamblador es como sigue:
@@ -103,7 +105,7 @@ Definir el puntero es **inicializar** el valor del puntero, es decir, guardar la
 `p = &a;`
 
 - ¿Cómo se escribe el contenido de la variable a la que apunta un puntero? Con el operador `*`.
-- `p = 20;`
+- `*p = 20;`
 
 En este caso como **`p`** contiene la dirección de **`a`**. Por tanto, se está modificando el valor de la variable **`a`** por medio de **`p`**.
 

@@ -48,7 +48,7 @@ D=M
 D=D-A
 @READKEYBOARD
 D;JGE
-@16
+@i
 A=M
 M=-1
 @i
