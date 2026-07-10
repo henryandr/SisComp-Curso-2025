@@ -28,7 +28,7 @@ Y luego este recorrido:
 ```cpp
 glm::vec2 target = glm::vec2(ofGetMouseX(), ofGetMouseY());
 for (auto& pos : snake) {
-    pos = glm::mix(glm::vec3(pos, 0.0f), glm::vec3(target, 0.0f), 0.2);
+    pos = glm::mix(pos, target, 0.2f);
     target = pos;
 }
 ```
